@@ -1,8 +1,13 @@
 import java.util.Properties;
 
+import javax.mail.Address;
 import javax.mail.Authenticator;
+import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.junit.Test;
 
@@ -30,7 +35,16 @@ public class AppTest {
 					return new PasswordAuthentication("cursojavawebavancado2021@gmail.com", "brasil@2020");
 				}
 			});
-			System.out.println(session);
+			
+			//enviando o e-mail
+			Address[] toUsers = InternetAddress.parse("wendelsegadilha99@gmail.com, wendelsegadilha@outlook.com, venes.lopes@gmail.com");
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("cursojavawebavancado2021@gmail.com")); //emissor
+			message.addRecipients(Message.RecipientType.TO, toUsers);//receptores
+			message.setSubject("Urgente! Chegou o e-mail enviado com Java do Curso Java Avançado");//assunto
+			message.setText("Olá meu nome é Wendel Segadilha e eu sou um programador Java.");//messagem - corpo do e-mail
+			Transport.send(message);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
