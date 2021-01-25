@@ -20,6 +20,7 @@ public class AppTest {
 
 			// configuração do servidor de email
 			Properties properties = new Properties();
+			properties.put("mail.smtp.ssl.trust", "*");//autorização ssl
 			properties.put("mail.smtp.auth", "true");// autorização
 			properties.put("mail.smtp.starttls", "true");// atenticação
 			properties.put("mail.smtp.host", "smtp.gmail.com");// servidor
@@ -39,7 +40,7 @@ public class AppTest {
 			//enviando o e-mail
 			Address[] toUsers = InternetAddress.parse("wendelsegadilha99@gmail.com, wendelsegadilha@outlook.com, venes.lopes@gmail.com");
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("cursojavawebavancado2021@gmail.com")); //emissor
+			message.setFrom(new InternetAddress("cursojavawebavancado2021@gmail.com", "Dev. Java - Wendel Segadilha")); //emissor
 			message.addRecipients(Message.RecipientType.TO, toUsers);//receptores
 			message.setSubject("Urgente! Chegou o e-mail enviado com Java do Curso Java Avançado");//assunto
 			message.setText("Olá meu nome é Wendel Segadilha e eu sou um programador Java.");//messagem - corpo do e-mail
