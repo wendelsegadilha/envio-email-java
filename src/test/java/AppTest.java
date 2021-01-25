@@ -14,12 +14,12 @@ public class AppTest {
 		email.setRemetente("WS Desenvolvimento de Softwares");
 		email.setDestinatario("wendelsegadilha99@gmail.com");
 		email.setAssunto("Venha fazer parte da nossa equipe de programadores");
-		email.setMensagem("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel vestibulum metus."
-				+ " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel vestibulum metus.");
+		email.setMensagem("Olá, <b>Programador Java</b> seja bem vindo a nossa equipe.<br/>Estamos felizes por você!"
+				+ "<br/><a href=\"https://www.bol.uol.com.br/\" target=\"_blank\">Acesse aqui!</a>");
 		
 		EmailService emailService = new EmailService();
 		try {
-			emailService.enviarEmail(email);
+			emailService.enviarEmail(email, true);
 			System.out.println("E-mail enviado com sucesso!");
 		} catch (Exception e) {
 			e.printStackTrace();

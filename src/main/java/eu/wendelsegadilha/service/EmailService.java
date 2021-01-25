@@ -15,7 +15,7 @@ import eu.wendelsegadilha.model.Email;
 
 public class EmailService {
 
-	public void enviarEmail(Email email) throws Exception {
+	public void enviarEmail(Email email, boolean textIsHtml) throws Exception {
 
 		// configuração do servidor de email
 		Properties properties = new Properties();
@@ -41,8 +41,15 @@ public class EmailService {
 		message.setFrom(new InternetAddress(email.getEmail(), email.getRemetente())); // emissor
 		message.addRecipients(Message.RecipientType.TO, toUsers);// receptores
 		message.setSubject(email.getAssunto());// assunto
-		// messagem - corpo do e-mail
-		message.setText(email.getMensagem());
+		
+		if(textIsHtml) {
+			//e-mail em html
+			message.setContent(email.getMensagem(), "text/html; charset=utf-8");
+		}else {
+			//e-mail em texto puro
+			message.setText(email.getMensagem());// messagem - corpo do e-mail			
+		}
+		
 		Transport.send(message);
 		
 	}
